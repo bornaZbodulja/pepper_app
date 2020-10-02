@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PepperApp</string>
+    <string name="welcome_text">Welcome to FER!</string>
+    <string name="tour_text">Where would you like to go?</string>
+    <string name="tesla">Tesla</string>
+    <string name="bookshop">Bookshop</string>
+    <string name="c_building">C Building</string>
+</resources>
