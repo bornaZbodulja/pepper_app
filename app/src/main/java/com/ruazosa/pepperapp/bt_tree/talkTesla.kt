@@ -89,6 +89,7 @@ fun talkTesla(qiContext: QiContext) {
     say.run()
 
     Variables.saying += ("Tesla" to true)
+    Variables.word = ""
 
 
 }

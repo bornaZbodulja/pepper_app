@@ -63,6 +63,7 @@ fun talkCBuilding(qiContext: QiContext) {
 
 
     Variables.saying += ("CBuilding" to true)
+    Variables.word = ""
 
 
 }

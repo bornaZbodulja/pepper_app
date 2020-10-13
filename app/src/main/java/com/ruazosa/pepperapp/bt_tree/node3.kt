@@ -43,12 +43,25 @@ class Listen4(qiContext: QiContext) {
             }
         }
         node5(qiContext)
+        if(Variables.nodes["Node5"] == false){
+            Variables.nodes += ("Node3" to false)
+            Log.d("NODE3_TAG", "Node3 false")
+        }else{
+            node6(qiContext)
+            if(Variables.nodes["Node6"] == false){
+                Variables.nodes += ("Node3" to false)
+                Log.d("NODE3_TAG", "Node3 false")
+            }else{
+                Variables.nodes += ("Node3" to true)
+                Log.d("NODE3_TAG", "Node3 true")
+            }
+
+        }
     }
 
     fun Listening() {
         Speak_Process()
         Thread.sleep(5000)
-
     }
 }
 

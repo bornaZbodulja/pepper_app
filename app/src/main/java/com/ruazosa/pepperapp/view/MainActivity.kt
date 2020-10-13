@@ -21,14 +21,20 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
         setContentView(R.layout.activity_main)
 
         teslaChoiceButton.setOnClickListener {
+            //Variables.listening += ("TeslaConf" to true)
+            Variables.word = "tesla"
             Variables.listening += ("TeslaConf" to true)
         }
 
         bookshopChoiceButton.setOnClickListener {
-            Variables.listening += ("BookshopConf" to true)
+            //Variables.listening += ("BookshopConf" to true)
+            Variables.word = "bookshop"
+            Variables.listening += ("BookShopConf" to true)
         }
 
         cBuildingChoiceButton.setOnClickListener {
+            //Variables.listening += ("CBuildingConf" to true)
+            Variables.word = "c building"
             Variables.listening += ("CBuildingConf" to true)
         }
     }
