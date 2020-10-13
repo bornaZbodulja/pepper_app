@@ -12,10 +12,10 @@ import com.aldebaran.qi.sdk.builder.ListenBuilder
 import com.aldebaran.qi.sdk.builder.PhraseSetBuilder
 import com.aldebaran.qi.sdk.builder.SayBuilder
 
-class Listen3(qiContext: QiContext){
+class Listen3(qiContext: QiContext) {
     val qiContext = qiContext
 
-    fun Speak_Process(){
+    fun Speak_Process() {
         Log.d("CONTINUE1_TAG", "continue block started")
         val locale = Locale(Language.ENGLISH, Region.UNITED_STATES)
         Variables.listening += ("Continue" to false)
@@ -31,7 +31,7 @@ class Listen3(qiContext: QiContext){
             .withTexts("yes", "no")
             .build()
 
-        while (true){
+        while (true) {
             val listen = ListenBuilder.with(qiContext)
                 .withPhraseSet(phraseSet)
                 .build()
@@ -40,9 +40,13 @@ class Listen3(qiContext: QiContext){
 
             Thread.sleep(3000)
 
-            when(listenResult.heardPhrase.text.toLowerCase()){
-                "yes" -> { Variables.listening += ("Continue" to true) }
-                "no" -> { Variables.listening += ("Continue" to false) }
+            when (listenResult.heardPhrase.text.toLowerCase()) {
+                "yes" -> {
+                    Variables.listening += ("Continue" to true)
+                }
+                "no" -> {
+                    Variables.listening += ("Continue" to false)
+                }
                 else -> {
                     val say: Say = SayBuilder.with(qiContext)
                         .withPhrase(Phrase("Please repeat, did not get the word"))
@@ -55,15 +59,14 @@ class Listen3(qiContext: QiContext){
         }
     }
 
-    fun Listening(){
-        Thread{
-            Speak_Process()
-            Thread.sleep(5000)
-        }.start()
+    fun Listening() {
+        Speak_Process()
+        Thread.sleep(5000)
+
     }
 }
 
-fun continue1(qiContext: QiContext){
+fun continue1(qiContext: QiContext) {
     val new = Listen3(qiContext)
     new.Listening()
 }

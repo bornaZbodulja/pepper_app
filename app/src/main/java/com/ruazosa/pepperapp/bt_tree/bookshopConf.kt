@@ -13,17 +13,17 @@ import com.aldebaran.qi.sdk.builder.ListenBuilder
 import com.aldebaran.qi.sdk.builder.PhraseSetBuilder
 import com.aldebaran.qi.sdk.builder.SayBuilder
 
-class Listen1(qiContext: QiContext){
+class Listen1(qiContext: QiContext) {
 
     private val qiContext = qiContext
     val vocabulary = Variables.vocabulary
 
-    fun Speak_Process(){
+    fun Speak_Process() {
         Log.d("BOOKSHOPCONF", "bookshop block started")
         Variables.listening += ("BookshopConf" to false)
         val locale = Locale(Language.ENGLISH, Region.UNITED_STATES)
 
-        while (true){
+        while (true) {
 
             val phraseSet = PhraseSetBuilder.with(qiContext)
                 .withTexts("yes", "no")
@@ -44,9 +44,13 @@ class Listen1(qiContext: QiContext){
 
             Thread.sleep(3000)
 
-            when(listenResult.heardPhrase.text.toLowerCase()){
-                "yes" -> { Variables.listening += ("BookshopConf" to true) }
-                "no" -> { Variables.listening += ("BookshopConf" to false) }
+            when (listenResult.heardPhrase.text.toLowerCase()) {
+                "yes" -> {
+                    Variables.listening += ("BookshopConf" to true)
+                }
+                "no" -> {
+                    Variables.listening += ("BookshopConf" to false)
+                }
                 else -> {
                     val say: Say = SayBuilder.with(qiContext)
                         .withPhrase(Phrase("Did not get the word, say yes or no again"))
@@ -60,15 +64,15 @@ class Listen1(qiContext: QiContext){
         }
     }
 
-    fun Listening(){
-        Thread{
-            Speak_Process()
-            Thread.sleep(5000)
-        }.start()
+    fun Listening() {
+
+        Speak_Process()
+        Thread.sleep(5000)
+
     }
 }
 
-fun bookshopConf(qiContext: QiContext){
+fun bookshopConf(qiContext: QiContext) {
     val new = Listen1(qiContext)
     new.Listening()
 }

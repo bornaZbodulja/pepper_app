@@ -14,22 +14,22 @@ import com.aldebaran.qi.sdk.builder.SayBuilder
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-fun node4(qiContext: QiContext){
-    GlobalScope.launch {
-        Log.d("NODE4_TAG", "Node4 started")
-        node7(qiContext)
-        if(Variables.nodes["Node7"] == true){
+fun node4(qiContext: QiContext) {
+
+    Log.d("NODE4_TAG", "Node4 started")
+    node7(qiContext)
+    if (Variables.nodes["Node7"] == true) {
+        Variables.nodes += ("Node4" to true)
+        Log.d("NODE4_TAG", "Node4 true")
+    } else {
+        node8(qiContext)
+        if (Variables.nodes["Node8"] == true) {
             Variables.nodes += ("Node4" to true)
             Log.d("NODE4_TAG", "Node4 true")
-        }else{
-            node8(qiContext)
-            if(Variables.nodes["Node8"] == true){
-                Variables.nodes += ("Node4" to true)
-                Log.d("NODE4_TAG", "Node4 true")
-            }else{
-                Variables.nodes += ("Node4" to false)
-                Log.d("NODE4_TAG", "Node4 false")
-            }
+        } else {
+            Variables.nodes += ("Node4" to false)
+            Log.d("NODE4_TAG", "Node4 false")
         }
     }
+
 }

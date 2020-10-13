@@ -6,12 +6,12 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 fun BT(qiContext: QiContext){
-    GlobalScope.launch {
+    Thread{
         Log.d("BT_TAG", "Behavior tree started")
         node0(qiContext)
 
         if(Variables.nodes["Node0"] == true){
             Log.d("BT_TAG", "Behavior executed correctly.")
         }
-    }
+    }.start()
 }

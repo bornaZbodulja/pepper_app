@@ -12,29 +12,29 @@ import com.aldebaran.qi.sdk.builder.SayBuilder
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-fun sayError(qiContext: QiContext){
-    GlobalScope.launch {
-        Variables.saying += ("Error" to false)
-        Log.d("ERROR_TAG", "sayError block started")
+fun sayError(qiContext: QiContext) {
 
-        val locale = Locale(Language.ENGLISH, Region.UNITED_STATES)
+    Variables.saying += ("Error" to false)
+    Log.d("ERROR_TAG", "sayError block started")
 
-        var say: Say = SayBuilder.with(qiContext)
-            .withPhrase(Phrase("Oops, it looks like an error happened somewhere in the behavior."))
-            .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
-            .withLocale(locale)
-            .build()
-        say.run()
+    val locale = Locale(Language.ENGLISH, Region.UNITED_STATES)
 
-        Thread.sleep(400)
+    var say: Say = SayBuilder.with(qiContext)
+        .withPhrase(Phrase("Oops, it looks like an error happened somewhere in the behavior."))
+        .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
+        .withLocale(locale)
+        .build()
+    say.run()
 
-        say = SayBuilder.with(qiContext)
-            .withPhrase(Phrase("Try to look at your computer and find the problem"))
-            .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
-            .withLocale(locale)
-            .build()
-        say.run()
+    Thread.sleep(400)
 
-        Variables.saying += ("Error" to true)
-    }
+    say = SayBuilder.with(qiContext)
+        .withPhrase(Phrase("Try to look at your computer and find the problem"))
+        .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
+        .withLocale(locale)
+        .build()
+    say.run()
+
+    Variables.saying += ("Error" to true)
+
 }

@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 
 fun sayChoice1(qiContext: QiContext){
 
-    GlobalScope.launch {
+
         Variables.saying += ("Choice1" to false)
         Log.d("CHOICE1_TAG", "sayChoice1 block started")
 
@@ -46,5 +46,5 @@ fun sayChoice1(qiContext: QiContext){
         say.run()
 
         Variables.saying += ("Choice1" to true)
-    }
+
 }

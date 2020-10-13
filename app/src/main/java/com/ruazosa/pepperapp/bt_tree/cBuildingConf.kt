@@ -12,17 +12,17 @@ import com.aldebaran.qi.sdk.builder.ListenBuilder
 import com.aldebaran.qi.sdk.builder.PhraseSetBuilder
 import com.aldebaran.qi.sdk.builder.SayBuilder
 
-class Listen2(qiContext: QiContext){
+class Listen2(qiContext: QiContext) {
 
     private val qiContext = qiContext
     val vocabulary = Variables.vocabulary
 
-    fun Speak_Process(){
+    fun Speak_Process() {
         Log.d("CBUILDING_CONF", "cBuilding block started")
         Variables.listening += ("CBuildingConf" to false)
         val locale = Locale(Language.ENGLISH, Region.UNITED_STATES)
 
-        while (true){
+        while (true) {
 
             val phraseSet = PhraseSetBuilder.with(qiContext)
                 .withTexts("yes", "no")
@@ -43,9 +43,13 @@ class Listen2(qiContext: QiContext){
 
             Thread.sleep(3000)
 
-            when(listenResult.heardPhrase.text.toLowerCase()){
-                "yes" -> { Variables.listening += ("CBuildingConf" to true) }
-                "no" -> { Variables.listening += ("CBuildingConf" to false) }
+            when (listenResult.heardPhrase.text.toLowerCase()) {
+                "yes" -> {
+                    Variables.listening += ("CBuildingConf" to true)
+                }
+                "no" -> {
+                    Variables.listening += ("CBuildingConf" to false)
+                }
                 else -> {
                     val say: Say = SayBuilder.with(qiContext)
                         .withPhrase(Phrase("Did not get the word, say yes or no again"))
@@ -59,15 +63,14 @@ class Listen2(qiContext: QiContext){
         }
     }
 
-    fun Listening(){
-        Thread{
-            Speak_Process()
-            Thread.sleep(5000)
-        }.start()
+    fun Listening() {
+        Speak_Process()
+        Thread.sleep(5000)
+
     }
 }
 
-fun cBuildingConf(qiContext: QiContext){
+fun cBuildingConf(qiContext: QiContext) {
     val new = Listen2(qiContext)
     new.Listening()
 }

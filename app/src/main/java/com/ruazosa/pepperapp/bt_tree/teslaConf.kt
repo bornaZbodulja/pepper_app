@@ -12,17 +12,17 @@ import com.aldebaran.qi.sdk.builder.ListenBuilder
 import com.aldebaran.qi.sdk.builder.PhraseSetBuilder
 import com.aldebaran.qi.sdk.builder.SayBuilder
 
-class Listen5(qiContext: QiContext){
+class Listen5(qiContext: QiContext) {
 
     private val qiContext = qiContext
     val vocabulary = Variables.vocabulary
 
-    fun Speak_Process(){
+    fun Speak_Process() {
         Log.d("TESLA_CONF", "tesla block started")
         Variables.listening += ("TeslaConf" to false)
         val locale = Locale(Language.ENGLISH, Region.UNITED_STATES)
 
-        while (true){
+        while (true) {
 
             val phraseSet = PhraseSetBuilder.with(qiContext)
                 .withTexts("yes", "no")
@@ -43,9 +43,13 @@ class Listen5(qiContext: QiContext){
 
             Thread.sleep(3000)
 
-            when(listenResult.heardPhrase.text.toLowerCase()){
-                "yes" -> { Variables.listening += ("TeslaConf" to true) }
-                "no" -> { Variables.listening += ("TeslaConf" to false) }
+            when (listenResult.heardPhrase.text.toLowerCase()) {
+                "yes" -> {
+                    Variables.listening += ("TeslaConf" to true)
+                }
+                "no" -> {
+                    Variables.listening += ("TeslaConf" to false)
+                }
                 else -> {
                     val say: Say = SayBuilder.with(qiContext)
                         .withPhrase(Phrase("Did not get the word, say yes or no again"))
@@ -59,15 +63,14 @@ class Listen5(qiContext: QiContext){
         }
     }
 
-    fun Listening(){
-        Thread{
-            Speak_Process()
-            Thread.sleep(5000)
-        }.start()
+    fun Listening() {
+        Speak_Process()
+        Thread.sleep(5000)
+
     }
 }
 
-fun teslaConf(qiContext: QiContext){
+fun teslaConf(qiContext: QiContext) {
     val new = Listen5(qiContext)
     new.Listening()
 }

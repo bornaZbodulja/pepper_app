@@ -12,30 +12,29 @@ import com.aldebaran.qi.sdk.builder.SayBuilder
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-fun sayIntroduction(qiContext: QiContext){
+fun sayIntroduction(qiContext: QiContext) {
 
-    GlobalScope.launch {
-        Variables.saying += ("Introduction" to false)
-        Log.d("INTRODUCTION_TAG", "introduction block started")
+    Variables.saying += ("Introduction" to false)
+    Log.d("INTRODUCTION_TAG", "introduction block started")
 
-        val locale = Locale(Language.ENGLISH, Region.UNITED_STATES)
+    val locale = Locale(Language.ENGLISH, Region.UNITED_STATES)
 
-        var say: Say = SayBuilder.with(qiContext)
-            .withPhrase(Phrase("Hello! Welcome to the Faculty of Electrical Engineering and Computing."))
-            .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
-            .withLocale(locale)
-            .build()
-        say.run()
+    var say: Say = SayBuilder.with(qiContext)
+        .withPhrase(Phrase("Hello! Welcome to the Faculty of Electrical Engineering and Computing."))
+        .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
+        .withLocale(locale)
+        .build()
+    say.run()
 
-        Thread.sleep(500)
+    Thread.sleep(500)
 
-        say = SayBuilder.with(qiContext)
-            .withPhrase(Phrase("My name is Pepper, and I will be your host today. Please stand still."))
-            .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
-            .withLocale(locale)
-            .build()
-        say.run()
+    say = SayBuilder.with(qiContext)
+        .withPhrase(Phrase("My name is Pepper, and I will be your host today. Please stand still."))
+        .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
+        .withLocale(locale)
+        .build()
+    say.run()
 
-        Variables.saying += ("Introduction" to true)
-    }
+    Variables.saying += ("Introduction" to true)
+
 }

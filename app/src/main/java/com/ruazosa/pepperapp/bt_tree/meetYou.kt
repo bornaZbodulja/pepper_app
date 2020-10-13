@@ -12,19 +12,19 @@ import com.aldebaran.qi.sdk.builder.SayBuilder
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-fun sayMeetYou(qiContext: QiContext){
-    GlobalScope.launch {
-        Variables.saying += ("MeetYou" to false)
-        Log.d("MEET_YOU_TAG", "sayMeetYou block started")
+fun sayMeetYou(qiContext: QiContext) {
 
-        val locale = Locale(Language.ENGLISH, Region.UNITED_STATES)
+    Variables.saying += ("MeetYou" to false)
+    Log.d("MEET_YOU_TAG", "sayMeetYou block started")
 
-        val say: Say = SayBuilder.with(qiContext)
-            .withPhrase(Phrase("It's really nice to meet you."))
-            .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
-            .withLocale(locale)
-            .build()
-        say.run()
-        Variables.saying += ("MeetYou" to true)
-    }
+    val locale = Locale(Language.ENGLISH, Region.UNITED_STATES)
+
+    val say: Say = SayBuilder.with(qiContext)
+        .withPhrase(Phrase("It's really nice to meet you."))
+        .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
+        .withLocale(locale)
+        .build()
+    say.run()
+    Variables.saying += ("MeetYou" to true)
+
 }

@@ -13,39 +13,37 @@ import com.aldebaran.qi.sdk.builder.SayBuilder
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-fun talkingBookshop(qiContext: QiContext){
+fun talkingBookshop(qiContext: QiContext) {
 
-    GlobalScope.launch {
-        Variables.saying += ("Bookshop" to false)
-        Log.d("BOOKSHOP_STARTED", "sayBookshop block started")
-        val locale = Locale(Language.ENGLISH, Region.UNITED_STATES)
+    Variables.saying += ("Bookshop" to false)
+    Log.d("BOOKSHOP_STARTED", "sayBookshop block started")
+    val locale = Locale(Language.ENGLISH, Region.UNITED_STATES)
 
-        var say: Say = SayBuilder.with(qiContext)
-            .withPhrase(Phrase("The bookshop is near the main entrance. Just follow me. "))
-            .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
-            .withLocale(locale)
-            .build()
+    var say: Say = SayBuilder.with(qiContext)
+        .withPhrase(Phrase("The bookshop is near the main entrance. Just follow me. "))
+        .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
+        .withLocale(locale)
+        .build()
 
-        say.run()
+    say.run()
 
-        say = SayBuilder.with(qiContext)
-            .withPhrase(Phrase("This is the place where all our students buy their books, notebooks and all the stuff for college."))
-            .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
-            .withLocale(locale)
-            .build()
+    say = SayBuilder.with(qiContext)
+        .withPhrase(Phrase("This is the place where all our students buy their books, notebooks and all the stuff for college."))
+        .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
+        .withLocale(locale)
+        .build()
 
-        say.run()
+    say.run()
 
-        say = SayBuilder.with(qiContext)
-            .withPhrase(Phrase("Sometimes they just stop by to get some ice cream or a chocolate for a snack."))
-            .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
-            .withLocale(locale)
-            .build()
+    say = SayBuilder.with(qiContext)
+        .withPhrase(Phrase("Sometimes they just stop by to get some ice cream or a chocolate for a snack."))
+        .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
+        .withLocale(locale)
+        .build()
 
-        say.run()
+    say.run()
 
-        Variables.saying += ("Bookshop" to true)
+    Variables.saying += ("Bookshop" to true)
 
-    }
 
 }

@@ -12,24 +12,22 @@ import com.aldebaran.qi.sdk.builder.SayBuilder
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-fun sayEnd(qiContext: QiContext){
+fun sayEnd(qiContext: QiContext) {
 
-    GlobalScope.launch {
-        Variables.saying += ("End" to false)
-        Log.d("END_TAG", "sayEnd block started")
+    Variables.saying += ("End" to false)
+    Log.d("END_TAG", "sayEnd block started")
 
-        val locale = Locale(Language.ENGLISH, Region.UNITED_STATES)
+    val locale = Locale(Language.ENGLISH, Region.UNITED_STATES)
 
-        val say: Say = SayBuilder.with(qiContext)
-            .withPhrase(Phrase("It was a pleasure to be your host. Hope to see you soon again. Goodbye"))
-            .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
-            .withLocale(locale)
-            .build()
-        say.run()
+    val say: Say = SayBuilder.with(qiContext)
+        .withPhrase(Phrase("It was a pleasure to be your host. Hope to see you soon again. Goodbye"))
+        .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
+        .withLocale(locale)
+        .build()
+    say.run()
 
-        Thread.sleep(2000)
-        Variables.saying += ("End" to true)
+    Thread.sleep(2000)
+    Variables.saying += ("End" to true)
 
-    }
 
 }

@@ -12,23 +12,23 @@ import com.aldebaran.qi.sdk.builder.SayBuilder
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-fun sayChoice2(qiContext: QiContext){
-    GlobalScope.launch {
-        Variables.saying += ("Choice2" to false)
-        Log.d("CHOICE2_TAG", "sayChoice2 block started")
+fun sayChoice2(qiContext: QiContext) {
 
-        val locale = Locale(Language.ENGLISH, Region.UNITED_STATES)
+    Variables.saying += ("Choice2" to false)
+    Log.d("CHOICE2_TAG", "sayChoice2 block started")
 
-        var say: Say = SayBuilder.with(qiContext)
-            .withPhrase(Phrase("Please tell me again where do you want me to take you."))
-            .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
-            .withLocale(locale)
-            .build()
-        say.run()
+    val locale = Locale(Language.ENGLISH, Region.UNITED_STATES)
 
-        Thread.sleep(300)
+    var say: Say = SayBuilder.with(qiContext)
+        .withPhrase(Phrase("Please tell me again where do you want me to take you."))
+        .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
+        .withLocale(locale)
+        .build()
+    say.run()
 
-        Variables.saying += ("Choice2" to true)
-    }
+    Thread.sleep(300)
+
+    Variables.saying += ("Choice2" to true)
+
 
 }
