@@ -6,7 +6,7 @@ object Variables {
     val PORT = 9559
     val name = "Ivan"
     val language = "English"
-    val word = ""
+    var word = ""
     var repeat = false
     var woken = false
     var recognised = false
@@ -19,5 +19,6 @@ object Variables {
     "tesla monument", "tesla", "monument")
     var saying = mapOf<String,Boolean>()
     var listening = mapOf<String, Boolean>()
+    var nodes = mapOf<String, Boolean>()
 
 }
