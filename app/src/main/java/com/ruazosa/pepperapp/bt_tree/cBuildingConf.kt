@@ -18,7 +18,7 @@ class Listen2(qiContext: QiContext){
     val vocabulary = Variables.vocabulary
 
     fun Speak_Process(){
-        Log.d("CBUILDINGCONF_CONF", "cBuilding block started")
+        Log.d("CBUILDING_CONF", "cBuilding block started")
         Variables.listening += ("CBuildingConf" to false)
         val locale = Locale(Language.ENGLISH, Region.UNITED_STATES)
 

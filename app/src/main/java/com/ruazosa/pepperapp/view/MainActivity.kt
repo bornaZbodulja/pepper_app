@@ -8,9 +8,7 @@ import com.aldebaran.qi.sdk.QiSDK
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks
 import com.aldebaran.qi.sdk.design.activity.RobotActivity
 import com.ruazosa.pepperapp.R
-import com.ruazosa.pepperapp.bt_tree.talkCBuilding
-import com.ruazosa.pepperapp.bt_tree.talkTesla
-import com.ruazosa.pepperapp.bt_tree.talkingBookshop
+import com.ruazosa.pepperapp.bt_tree.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
@@ -23,15 +21,15 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
         setContentView(R.layout.activity_main)
 
         teslaChoiceButton.setOnClickListener {
-            talkTesla(qiContext)
+            Variables.listening += ("TeslaConf" to true)
         }
 
         bookshopChoiceButton.setOnClickListener {
-            talkingBookshop(qiContext)
+            Variables.listening += ("BookshopConf" to true)
         }
 
         cBuildingChoiceButton.setOnClickListener {
-            talkCBuilding(qiContext)
+            Variables.listening += ("CBuildingConf" to true)
         }
     }
 
@@ -44,6 +42,7 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
     override fun onRobotFocusGained(qiContext: QiContext?) {
         if (qiContext != null) {
             this.qiContext = qiContext
+            BT(qiContext)
         }
     }
 
