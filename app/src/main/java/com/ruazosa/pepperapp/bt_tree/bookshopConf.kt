@@ -1,5 +1,6 @@
 package com.ruazosa.pepperapp.bt_tree
 
+import android.os.Handler
 import android.util.Log
 import com.aldebaran.qi.sdk.QiContext
 import com.aldebaran.qi.sdk.`object`.conversation.BodyLanguageOption
@@ -12,6 +13,7 @@ import com.aldebaran.qi.sdk.`object`.locale.Region
 import com.aldebaran.qi.sdk.builder.ListenBuilder
 import com.aldebaran.qi.sdk.builder.PhraseSetBuilder
 import com.aldebaran.qi.sdk.builder.SayBuilder
+import com.aldebaran.qi.sdk.util.PhraseSetUtil
 
 class Listen1(qiContext: QiContext) {
 
@@ -25,8 +27,12 @@ class Listen1(qiContext: QiContext) {
 
         while (true) {
 
-            val phraseSet = PhraseSetBuilder.with(qiContext)
-                .withTexts("yes", "no")
+            val phraseSetNo = PhraseSetBuilder.with(qiContext)
+                .withTexts("nope", "no")
+                .build()
+
+            val phraseSetYes = PhraseSetBuilder.with(qiContext)
+                .withTexts("yes", "yeah")
                 .build()
 
             val say: Say = SayBuilder.with(qiContext)
@@ -37,28 +43,24 @@ class Listen1(qiContext: QiContext) {
             say.run()
 
             val listen = ListenBuilder.with(qiContext)
-                .withPhraseSet(phraseSet)
+                .withPhraseSets(phraseSetNo, phraseSetYes)
                 .build()
 
             val listenResult = listen.run()
 
-            Thread.sleep(3000)
+            val matchedPhraseSet = listenResult.matchedPhraseSet
 
-            when (listenResult.heardPhrase.text.toLowerCase()) {
-                "yes" -> {
-                    Variables.listening += ("BookshopConf" to true)
-                }
-                "no" -> {
-                    Variables.listening += ("BookshopConf" to false)
-                }
-                else -> {
-                    val say: Say = SayBuilder.with(qiContext)
-                        .withPhrase(Phrase("Did not get the word, say yes or no again"))
-                        .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
-                        .withLocale(locale)
-                        .build()
-                    say.run()
-                }
+            if(PhraseSetUtil.equals(matchedPhraseSet, phraseSetYes)){
+                Variables.listening += ("BookshopConf" to true)
+            }else if(PhraseSetUtil.equals(matchedPhraseSet, phraseSetNo)){
+                Variables.listening += ("BookshopConf" to false)
+            }else{
+                val say: Say = SayBuilder.with(qiContext)
+                    .withPhrase(Phrase("Did not get the word, say yes or no again"))
+                    .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
+                    .withLocale(locale)
+                    .build()
+                say.run()
             }
 
         }

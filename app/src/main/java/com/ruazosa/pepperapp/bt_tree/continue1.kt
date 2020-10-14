@@ -1,5 +1,6 @@
 package com.ruazosa.pepperapp.bt_tree
 
+import android.os.Handler
 import android.util.Log
 import com.aldebaran.qi.sdk.QiContext
 import com.aldebaran.qi.sdk.`object`.conversation.BodyLanguageOption
@@ -11,6 +12,7 @@ import com.aldebaran.qi.sdk.`object`.locale.Region
 import com.aldebaran.qi.sdk.builder.ListenBuilder
 import com.aldebaran.qi.sdk.builder.PhraseSetBuilder
 import com.aldebaran.qi.sdk.builder.SayBuilder
+import com.aldebaran.qi.sdk.util.PhraseSetUtil
 
 class Listen3(qiContext: QiContext) {
     val qiContext = qiContext
@@ -27,35 +29,38 @@ class Listen3(qiContext: QiContext) {
             .build()
         say.run()
 
-        val phraseSet = PhraseSetBuilder.with(qiContext)
-            .withTexts("yes", "no")
+        val phraseSetNo = PhraseSetBuilder.with(qiContext)
+            .withTexts("nope", "no")
+            .build()
+
+        val phraseSetYes = PhraseSetBuilder.with(qiContext)
+            .withTexts("yes", "yeah")
             .build()
 
         while (true) {
             val listen = ListenBuilder.with(qiContext)
-                .withPhraseSet(phraseSet)
+                .withPhraseSets(phraseSetNo, phraseSetYes)
                 .build()
 
             val listenResult = listen.run()
 
-            Thread.sleep(3000)
+            val matchedPhraseSet = listenResult.matchedPhraseSet
 
-            when (listenResult.heardPhrase.text.toLowerCase()) {
-                "yes" -> {
-                    Variables.listening += ("Continue" to true)
-                }
-                "no" -> {
-                    Variables.listening += ("Continue" to false)
-                }
-                else -> {
-                    val say: Say = SayBuilder.with(qiContext)
-                        .withPhrase(Phrase("Please repeat, did not get the word"))
-                        .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
-                        .withLocale(locale)
-                        .build()
-                    say.run()
-                }
+            if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetYes)) {
+                Variables.listening += ("Continue" to true)
+                break
+            } else if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetNo)) {
+                Variables.listening += ("Continue" to false)
+                break
+            } else {
+                val say: Say = SayBuilder.with(qiContext)
+                    .withPhrase(Phrase("Did not get the word, say yes or no again"))
+                    .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
+                    .withLocale(locale)
+                    .build()
+                say.run()
             }
+
         }
     }
 
