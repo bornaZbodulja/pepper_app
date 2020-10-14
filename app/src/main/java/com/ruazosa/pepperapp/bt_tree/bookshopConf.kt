@@ -52,8 +52,10 @@ class Listen1(qiContext: QiContext) {
 
             if(PhraseSetUtil.equals(matchedPhraseSet, phraseSetYes)){
                 Variables.listening += ("BookshopConf" to true)
+                break
             }else if(PhraseSetUtil.equals(matchedPhraseSet, phraseSetNo)){
                 Variables.listening += ("BookshopConf" to false)
+                break
             }else{
                 val say: Say = SayBuilder.with(qiContext)
                     .withPhrase(Phrase("Did not get the word, say yes or no again"))
