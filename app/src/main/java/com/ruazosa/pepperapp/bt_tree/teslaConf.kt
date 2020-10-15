@@ -24,6 +24,13 @@ class Listen5(qiContext: QiContext) {
         Variables.listening += ("TeslaConf" to false)
         val locale = Locale(Language.ENGLISH, Region.UNITED_STATES)
 
+        val say: Say = SayBuilder.with(qiContext)
+            .withPhrase(Phrase("Did you say tesla monument?"))
+            .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
+            .withLocale(locale)
+            .build()
+        say.run()
+
         while (true) {
 
             val phraseSetNo = PhraseSetBuilder.with(qiContext)
@@ -33,13 +40,6 @@ class Listen5(qiContext: QiContext) {
             val phraseSetYes = PhraseSetBuilder.with(qiContext)
                 .withTexts("yes", "yeah")
                 .build()
-
-            val say: Say = SayBuilder.with(qiContext)
-                .withPhrase(Phrase("Did you say tesla monument?"))
-                .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
-                .withLocale(locale)
-                .build()
-            say.run()
 
             val listen = ListenBuilder.with(qiContext)
                 .withPhraseSets(phraseSetNo, phraseSetYes)

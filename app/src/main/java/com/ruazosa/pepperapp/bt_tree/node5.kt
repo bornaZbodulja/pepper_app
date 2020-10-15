@@ -7,19 +7,36 @@ fun node5(qiContext: QiContext) {
 
     node9(qiContext)
     Log.d("NODE5_TAG", "Node5 started")
-    if (Variables.nodes["Node9"] == true) {
-        Variables.nodes += ("Node5" to true)
-        Log.d("NODE5_TAG", "Node5 true")
-    } else {
-        node10(qiContext)
-        if (Variables.nodes["Node10"] == true) {
-            Variables.nodes += ("Node5" to true)
-        } else {
+
+    when(Variables.word){
+        "bookshop" ->{
+            node9(qiContext)
+            if (Variables.nodes["Node9"] == true) {
+                Variables.nodes += ("Node5" to true)
+                Log.d("NODE5_TAG", "Node5 true")
+            }else{
+                Variables.nodes += ("Node5" to false)
+                Log.d("NODE5_TAG", "Node5 false")
+            }
+        }
+
+        "tesla" ->{
+            node10(qiContext)
+            if (Variables.nodes["Node10"] == true) {
+                Variables.nodes += ("Node5" to true)
+                Log.d("NODE5_TAG", "Node5 true")
+            }else{
+                Variables.nodes += ("Node5" to false)
+                Log.d("NODE5_TAG", "Node5 false")
+            }
+        }
+
+        "c building" ->{
             node11(qiContext)
             if (Variables.nodes["Node11"] == true) {
                 Variables.nodes += ("Node5" to true)
                 Log.d("NODE5_TAG", "Node5 true")
-            } else {
+            }else{
                 Variables.nodes += ("Node5" to false)
                 Log.d("NODE5_TAG", "Node5 false")
             }

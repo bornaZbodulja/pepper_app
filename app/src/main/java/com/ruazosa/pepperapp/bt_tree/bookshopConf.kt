@@ -18,12 +18,18 @@ import com.aldebaran.qi.sdk.util.PhraseSetUtil
 class Listen1(qiContext: QiContext) {
 
     private val qiContext = qiContext
-    val vocabulary = Variables.vocabulary
 
     fun Speak_Process() {
         Log.d("BOOKSHOPCONF", "bookshop block started")
         Variables.listening += ("BookshopConf" to false)
         val locale = Locale(Language.ENGLISH, Region.UNITED_STATES)
+
+        val say: Say = SayBuilder.with(qiContext)
+            .withPhrase(Phrase("Did you say bookshop?"))
+            .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
+            .withLocale(locale)
+            .build()
+        say.run()
 
         while (true) {
 
@@ -35,13 +41,6 @@ class Listen1(qiContext: QiContext) {
                 .withTexts("yes", "yeah")
                 .build()
 
-            val say: Say = SayBuilder.with(qiContext)
-                .withPhrase(Phrase("Did you say bookshop?"))
-                .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
-                .withLocale(locale)
-                .build()
-            say.run()
-
             val listen = ListenBuilder.with(qiContext)
                 .withPhraseSets(phraseSetNo, phraseSetYes)
                 .build()
@@ -50,13 +49,13 @@ class Listen1(qiContext: QiContext) {
 
             val matchedPhraseSet = listenResult.matchedPhraseSet
 
-            if(PhraseSetUtil.equals(matchedPhraseSet, phraseSetYes)){
+            if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetYes)) {
                 Variables.listening += ("BookshopConf" to true)
                 break
-            }else if(PhraseSetUtil.equals(matchedPhraseSet, phraseSetNo)){
+            } else if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetNo)) {
                 Variables.listening += ("BookshopConf" to false)
                 break
-            }else{
+            } else {
                 val sayy: Say = SayBuilder.with(qiContext)
                     .withPhrase(Phrase("Did not get the word, say yes or no again"))
                     .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)

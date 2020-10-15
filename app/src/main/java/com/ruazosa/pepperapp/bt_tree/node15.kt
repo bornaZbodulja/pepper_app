@@ -12,7 +12,7 @@ fun node15(qiContext: QiContext) {
         Variables.nodes += ("Node15" to false)
         Log.d("NODE15_TAG", "Node15 false")
     } else {
-        talkingBookshop(qiContext)
+        talkTesla(qiContext)
         if (Variables.saying["Tesla"] == true) {
             Variables.nodes += ("Node15" to true)
             Log.d("NODE15_TAG", "Node15 true")
