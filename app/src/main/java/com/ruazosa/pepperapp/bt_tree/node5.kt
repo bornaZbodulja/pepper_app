@@ -5,7 +5,6 @@ import com.aldebaran.qi.sdk.QiContext
 
 fun node5(qiContext: QiContext) {
 
-    node9(qiContext)
     Log.d("NODE5_TAG", "Node5 started")
 
     when(Variables.word){
@@ -21,7 +20,7 @@ fun node5(qiContext: QiContext) {
         }
 
         "tesla" ->{
-            node10(qiContext)
+            node11(qiContext)
             if (Variables.nodes["Node10"] == true) {
                 Variables.nodes += ("Node5" to true)
                 Log.d("NODE5_TAG", "Node5 true")
@@ -32,7 +31,7 @@ fun node5(qiContext: QiContext) {
         }
 
         "c building" ->{
-            node11(qiContext)
+            node10(qiContext)
             if (Variables.nodes["Node11"] == true) {
                 Variables.nodes += ("Node5" to true)
                 Log.d("NODE5_TAG", "Node5 true")
