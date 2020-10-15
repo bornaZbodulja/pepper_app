@@ -4,7 +4,7 @@ object Variables {
 
     val IP = "192.168.1.107"
     val PORT = 9559
-    val name = "Ivan"
+    val name = "Bosiljko"
     val language = "English"
     var word = ""
     var repeat = false

@@ -28,6 +28,13 @@ fun sayChoice2(qiContext: QiContext) {
 
     Thread.sleep(300)
 
+    say = SayBuilder.with(qiContext)
+        .withPhrase(Phrase("Just pick a location on my tablet or simply tell me."))
+        .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
+        .withLocale(locale)
+        .build()
+    say.run()
+
     Variables.saying += ("Choice2" to true)
 
 

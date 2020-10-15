@@ -22,7 +22,7 @@ class Listen3(qiContext: QiContext) {
         val locale = Locale(Language.ENGLISH, Region.UNITED_STATES)
         Variables.listening += ("Continue" to false)
 
-        var say: Say = SayBuilder.with(qiContext)
+        val say: Say = SayBuilder.with(qiContext)
             .withPhrase(Phrase("Is there anywhere else you would like me to take you?"))
             .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
             .withLocale(locale)
@@ -53,12 +53,12 @@ class Listen3(qiContext: QiContext) {
                 Variables.listening += ("Continue" to false)
                 break
             } else {
-                val say: Say = SayBuilder.with(qiContext)
+                val sayy: Say = SayBuilder.with(qiContext)
                     .withPhrase(Phrase("Did not get the word, say yes or no again"))
                     .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
                     .withLocale(locale)
                     .build()
-                say.run()
+                sayy.run()
             }
 
         }

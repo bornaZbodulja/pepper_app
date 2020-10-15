@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 fun node0(qiContext: QiContext) {
 
     Log.d("NODE0_TAG", "Node0 started")
+    node1(qiContext)
     if (Variables.nodes["Node1"] == false) {
         Variables.nodes += ("Node0" to false)
         Log.d("NODE0_TAG", "Node0 false")

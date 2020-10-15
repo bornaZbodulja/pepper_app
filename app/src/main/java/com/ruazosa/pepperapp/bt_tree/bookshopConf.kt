@@ -57,12 +57,12 @@ class Listen1(qiContext: QiContext) {
                 Variables.listening += ("BookshopConf" to false)
                 break
             }else{
-                val say: Say = SayBuilder.with(qiContext)
+                val sayy: Say = SayBuilder.with(qiContext)
                     .withPhrase(Phrase("Did not get the word, say yes or no again"))
                     .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
                     .withLocale(locale)
                     .build()
-                say.run()
+                sayy.run()
             }
 
         }

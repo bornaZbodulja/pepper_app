@@ -6,6 +6,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 fun node14(qiContext: QiContext) {
+
     Log.d("NODE14_TAG", "Node14 started")
     cBuildingConf(qiContext)
     if (Variables.listening["CBuildingConf"] == false) {

@@ -14,6 +14,7 @@ import com.aldebaran.qi.sdk.builder.SayBuilder
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import android.os.Handler;
+import com.aldebaran.qi.sdk.util.PhraseSetUtil
 
 class Listen4(qiContext: QiContext) {
     val qiContext = qiContext
@@ -22,17 +23,51 @@ class Listen4(qiContext: QiContext) {
         Log.d("NODE3_TAG", "node3 block started")
         val locale = Locale(Language.ENGLISH, Region.UNITED_STATES)
 
+        val phraseSetBookshop = PhraseSetBuilder.with(qiContext)
+            .withTexts("bookshop")
+            .build()
+
+        val phraseSetTesla = PhraseSetBuilder.with(qiContext)
+            .withTexts("tesla", "tesla monument", "monument")
+            .build()
+
+        val phraseSetCBuilding = PhraseSetBuilder.with(qiContext)
+            .withTexts("c building", "elevators")
+            .build()
+
         while (true) {
-            Thread.sleep(3000)
-            Log.d("NODE3_TAG", Variables.word)
-            if (Variables.word.toLowerCase() == "bookshop") {
+
+            val listen = ListenBuilder.with(qiContext)
+                .withPhraseSets(phraseSetBookshop, phraseSetTesla, phraseSetCBuilding)
+                .build()
+
+            val listenResult = listen.run()
+
+            val matchedPhraseSet = listenResult.matchedPhraseSet
+            // Log.d("NODE3_TAG", Variables.word)
+            if (Variables.word.toLowerCase() == "bookshop" || PhraseSetUtil.equals(
+                    matchedPhraseSet,
+                    phraseSetBookshop
+                )
+            ) {
                 Log.d("NODE3_TAG", "bookshop recognised")
+                Variables.word = "bookshop"
                 break
-            } else if (Variables.word.toLowerCase() == "c building" || Variables.word.toLowerCase() == "elevators") {
+            } else if (Variables.word.toLowerCase() == "c building" || PhraseSetUtil.equals(
+                    matchedPhraseSet,
+                    phraseSetCBuilding
+                )
+            ) {
                 Log.d("NODE3_TAG", "c building recognised")
+                Variables.word = "c building"
                 break
-            } else if (Variables.word.toLowerCase() == "tesla") {
+            } else if (Variables.word.toLowerCase() == "tesla" || PhraseSetUtil.equals(
+                    matchedPhraseSet,
+                    phraseSetTesla
+                )
+            ) {
                 Log.d("NODE3_TAG", "tesla recognised")
+                Variables.word = "tesla"
                 break
             } else {
                 val say: Say = SayBuilder.with(qiContext)
@@ -44,15 +79,15 @@ class Listen4(qiContext: QiContext) {
             }
         }
         node5(qiContext)
-        if(Variables.nodes["Node5"] == false){
+        if (Variables.nodes["Node5"] == false) {
             Variables.nodes += ("Node3" to false)
             Log.d("NODE3_TAG", "Node3 false")
-        }else{
+        } else {
             node6(qiContext)
-            if(Variables.nodes["Node6"] == false){
+            if (Variables.nodes["Node6"] == false) {
                 Variables.nodes += ("Node3" to false)
                 Log.d("NODE3_TAG", "Node3 false")
-            }else{
+            } else {
                 Variables.nodes += ("Node3" to true)
                 Log.d("NODE3_TAG", "Node3 true")
             }

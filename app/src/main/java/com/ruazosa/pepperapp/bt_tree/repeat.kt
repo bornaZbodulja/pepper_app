@@ -12,11 +12,14 @@ fun repeat(qiContext: QiContext) {
         if (Variables.nodes["Node3"] == true) {
             Variables.repeat = true
             Log.d("REPEAT_TAG", "repeat true")
+            break
         } else if (Variables.nodes["Node3"] == false) {
             if (Variables.executed && !Variables.invert) {
                 Variables.repeat = false
                 Log.d("REPEAT_TAG", "repeat false")
+                break
             }
+            Thread.sleep(1000)
         }
     }
 

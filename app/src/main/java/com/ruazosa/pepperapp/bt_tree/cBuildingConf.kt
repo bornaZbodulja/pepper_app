@@ -48,13 +48,13 @@ class Listen2(qiContext: QiContext) {
             val listenResult = listen.run()
 
             val matchedPhraseSet = listenResult.matchedPhraseSet
-            if(PhraseSetUtil.equals(matchedPhraseSet, phraseSetYes)){
+            if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetYes)) {
                 Variables.listening += ("CBuildingConf" to true)
                 break
-            }else if(PhraseSetUtil.equals(matchedPhraseSet, phraseSetNo)){
+            } else if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetNo)) {
                 Variables.listening += ("CBuildingConf" to false)
                 break
-            }else{
+            } else {
                 val say: Say = SayBuilder.with(qiContext)
                     .withPhrase(Phrase("Did not get the word, say yes or no again"))
                     .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
@@ -65,11 +65,11 @@ class Listen2(qiContext: QiContext) {
         }
     }
 
-        fun Listening() {
-            Speak_Process()
-            Thread.sleep(5000)
-        }
+    fun Listening() {
+        Speak_Process()
+        Thread.sleep(5000)
     }
+}
 
     fun cBuildingConf(qiContext: QiContext) {
         val new = Listen2(qiContext)
