@@ -45,5 +45,5 @@ fun talkingBookshop(qiContext: QiContext) {
 
     Variables.saying += ("Bookshop" to true)
     Variables.word = ""
-
+    Variables.tabletInput = false
 }

@@ -15,6 +15,7 @@ object Variables {
     var invert = false
     var executed = false
     var navFail = false
+    var tabletInput = false
     val vocabulary = setOf("yes", "no", "bookshop", "elevators", "c building",
     "tesla monument", "tesla", "monument")
     var saying = mapOf<String,Boolean>()

@@ -35,47 +35,62 @@ class Listen4(qiContext: QiContext) {
             .withTexts("c building", "elevators")
             .build()
 
-        while (true) {
+        if (Variables.tabletInput) {
+            when (Variables.word) {
+                "bookshop" -> {
+                    Log.d("NODE3_TAG", "bookshop recognised")
+                }
+                "tesla" -> {
+                    Log.d("NODE3_TAG", "tesla recognised")
+                }
+                "c building" -> {
+                    Log.d("NODE3_TAG", "c building recognised")
+                }
+            }
+        } else {
 
-            val listen = ListenBuilder.with(qiContext)
-                .withPhraseSets(phraseSetBookshop, phraseSetTesla, phraseSetCBuilding)
-                .build()
+            while (true) {
 
-            val listenResult = listen.run()
-
-            val matchedPhraseSet = listenResult.matchedPhraseSet
-            // Log.d("NODE3_TAG", Variables.word)
-            if (Variables.word.toLowerCase() == "bookshop" || PhraseSetUtil.equals(
-                    matchedPhraseSet,
-                    phraseSetBookshop
-                )
-            ) {
-                Log.d("NODE3_TAG", "bookshop recognised")
-                Variables.word = "bookshop"
-                break
-            } else if (Variables.word.toLowerCase() == "c building" || PhraseSetUtil.equals(
-                    matchedPhraseSet,
-                    phraseSetCBuilding
-                )
-            ) {
-                Log.d("NODE3_TAG", "c building recognised")
-                Variables.word = "c building"
-                break
-            } else if (Variables.word.toLowerCase() == "tesla" || PhraseSetUtil.equals(
-                    matchedPhraseSet,
-                    phraseSetTesla
-                )
-            ) {
-                Log.d("NODE3_TAG", "tesla recognised")
-                Variables.word = "tesla"
-                break
-            } else {
-                val say: Say = SayBuilder.with(qiContext)
-                    .withPhrase(Phrase("Did not get the word, please try again."))
-                    .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
-                    .withLocale(locale)
+                val listen = ListenBuilder.with(qiContext)
+                    .withPhraseSets(phraseSetBookshop, phraseSetTesla, phraseSetCBuilding)
                     .build()
-                say.run()
+
+                val listenResult = listen.run()
+
+                val matchedPhraseSet = listenResult.matchedPhraseSet
+                // Log.d("NODE3_TAG", Variables.word)
+                if (Variables.word.toLowerCase() == "bookshop" || PhraseSetUtil.equals(
+                        matchedPhraseSet,
+                        phraseSetBookshop
+                    )
+                ) {
+                    Log.d("NODE3_TAG", "bookshop recognised")
+                    Variables.word = "bookshop"
+                    break
+                } else if (Variables.word.toLowerCase() == "c building" || PhraseSetUtil.equals(
+                        matchedPhraseSet,
+                        phraseSetCBuilding
+                    )
+                ) {
+                    Log.d("NODE3_TAG", "c building recognised")
+                    Variables.word = "c building"
+                    break
+                } else if (Variables.word.toLowerCase() == "tesla" || PhraseSetUtil.equals(
+                        matchedPhraseSet,
+                        phraseSetTesla
+                    )
+                ) {
+                    Log.d("NODE3_TAG", "tesla recognised")
+                    Variables.word = "tesla"
+                    break
+                } else {
+                    val say: Say = SayBuilder.with(qiContext)
+                        .withPhrase(Phrase("Did not get the word, please try again."))
+                        .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
+                        .withLocale(locale)
+                        .build()
+                    say.run()
+                }
             }
         }
         node5(qiContext)
@@ -97,7 +112,7 @@ class Listen4(qiContext: QiContext) {
 
     fun Listening() {
         Speak_Process()
-        Thread.sleep(5000)
+        Thread.sleep(1000)
     }
 }
 

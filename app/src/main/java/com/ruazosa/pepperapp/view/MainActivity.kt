@@ -24,18 +24,21 @@ class MainActivity : RobotActivity(), RobotLifecycleCallbacks {
             //Variables.listening += ("TeslaConf" to true)
             Variables.word = "tesla"
             Variables.listening += ("TeslaConf" to true)
+            Variables.tabletInput = true
         }
 
         bookshopChoiceButton.setOnClickListener {
             //Variables.listening += ("BookshopConf" to true)
             Variables.word = "bookshop"
             Variables.listening += ("BookShopConf" to true)
+            Variables.tabletInput = true
         }
 
         cBuildingChoiceButton.setOnClickListener {
             //Variables.listening += ("CBuildingConf" to true)
             Variables.word = "c building"
             Variables.listening += ("CBuildingConf" to true)
+            Variables.tabletInput = true
         }
     }
 

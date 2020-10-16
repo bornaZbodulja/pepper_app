@@ -24,50 +24,55 @@ class Listen2(qiContext: QiContext) {
         Variables.listening += ("CBuildingConf" to false)
         val locale = Locale(Language.ENGLISH, Region.UNITED_STATES)
 
-        val say: Say = SayBuilder.with(qiContext)
-            .withPhrase(Phrase("Did you say C building elevators?"))
-            .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
-            .withLocale(locale)
-            .build()
-        say.run()
+        if (Variables.tabletInput) {
+            Variables.listening += ("CBuildingConf" to true)
+        } else {
 
-        while (true) {
-
-            val phraseSetNo = PhraseSetBuilder.with(qiContext)
-                .withTexts("nope", "no")
+            val say: Say = SayBuilder.with(qiContext)
+                .withPhrase(Phrase("Did you say C building elevators?"))
+                .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
+                .withLocale(locale)
                 .build()
+            say.run()
 
-            val phraseSetYes = PhraseSetBuilder.with(qiContext)
-                .withTexts("yes", "yeah")
-                .build()
+            while (true) {
 
-            val listen = ListenBuilder.with(qiContext)
-                .withPhraseSets(phraseSetNo, phraseSetYes)
-                .build()
-
-            val listenResult = listen.run()
-
-            val matchedPhraseSet = listenResult.matchedPhraseSet
-            if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetYes)) {
-                Variables.listening += ("CBuildingConf" to true)
-                break
-            } else if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetNo)) {
-                Variables.listening += ("CBuildingConf" to false)
-                break
-            } else {
-                val say: Say = SayBuilder.with(qiContext)
-                    .withPhrase(Phrase("Did not get the word, say yes or no again"))
-                    .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
-                    .withLocale(locale)
+                val phraseSetNo = PhraseSetBuilder.with(qiContext)
+                    .withTexts("nope", "no")
                     .build()
-                say.run()
+
+                val phraseSetYes = PhraseSetBuilder.with(qiContext)
+                    .withTexts("yes", "yeah")
+                    .build()
+
+                val listen = ListenBuilder.with(qiContext)
+                    .withPhraseSets(phraseSetNo, phraseSetYes)
+                    .build()
+
+                val listenResult = listen.run()
+
+                val matchedPhraseSet = listenResult.matchedPhraseSet
+                if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetYes)) {
+                    Variables.listening += ("CBuildingConf" to true)
+                    break
+                } else if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetNo)) {
+                    Variables.listening += ("CBuildingConf" to false)
+                    break
+                } else {
+                    val say: Say = SayBuilder.with(qiContext)
+                        .withPhrase(Phrase("Did not get the word, say yes or no again"))
+                        .withBodyLanguageOption(BodyLanguageOption.NEUTRAL)
+                        .withLocale(locale)
+                        .build()
+                    say.run()
+                }
             }
         }
     }
 
     fun Listening() {
         Speak_Process()
-        Thread.sleep(5000)
+        Thread.sleep(1000)
     }
 }
 

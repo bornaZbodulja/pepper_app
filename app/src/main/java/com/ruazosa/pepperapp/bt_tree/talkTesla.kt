@@ -90,6 +90,7 @@ fun talkTesla(qiContext: QiContext) {
 
     Variables.saying += ("Tesla" to true)
     Variables.word = ""
+    Variables.tabletInput = false
 
 
 }

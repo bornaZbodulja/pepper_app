@@ -66,7 +66,7 @@ class Listen3(qiContext: QiContext) {
 
     fun Listening() {
         Speak_Process()
-        Thread.sleep(5000)
+        Thread.sleep(1000)
 
     }
 }
