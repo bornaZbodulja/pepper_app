@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 
 fun talkTesla(qiContext: QiContext) {
 
-    Variables.saying += ("Bookshop" to false)
+    Variables.saying += ("Tesla" to false)
     Log.d("TESLA_STARTED", "sayTelsa block started")
     val locale = Locale(Language.ENGLISH, Region.UNITED_STATES)
 

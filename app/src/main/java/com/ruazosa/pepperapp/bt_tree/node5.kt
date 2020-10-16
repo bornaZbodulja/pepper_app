@@ -21,7 +21,7 @@ fun node5(qiContext: QiContext) {
 
         "tesla" ->{
             node11(qiContext)
-            if (Variables.nodes["Node10"] == true) {
+            if (Variables.nodes["Node11"] == true) {
                 Variables.nodes += ("Node5" to true)
                 Log.d("NODE5_TAG", "Node5 true")
             }else{
@@ -32,7 +32,7 @@ fun node5(qiContext: QiContext) {
 
         "c building" ->{
             node10(qiContext)
-            if (Variables.nodes["Node11"] == true) {
+            if (Variables.nodes["Node10"] == true) {
                 Variables.nodes += ("Node5" to true)
                 Log.d("NODE5_TAG", "Node5 true")
             }else{

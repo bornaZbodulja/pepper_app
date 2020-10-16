@@ -2,8 +2,6 @@ package com.ruazosa.pepperapp.bt_tree
 
 import android.util.Log
 import com.aldebaran.qi.sdk.QiContext
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 fun node12(qiContext: QiContext) {
 
